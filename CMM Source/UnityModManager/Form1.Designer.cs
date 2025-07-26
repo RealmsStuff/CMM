@@ -20,6 +20,7 @@ namespace UnityModManager
             listBoxMods = new System.Windows.Forms.ListBox();
             btnInstallMod = new System.Windows.Forms.Button();
             labelGamePath = new System.Windows.Forms.Label();
+            textBoxDescription = new System.Windows.Forms.TextBox();
             SuspendLayout();
             // 
             // btnBrowse
@@ -60,9 +61,20 @@ namespace UnityModManager
             labelGamePath.TabIndex = 3;
             labelGamePath.Text = "No game path set yet";
             // 
+            // textBoxDescription
+            // 
+            textBoxDescription.Location = new System.Drawing.Point(378, 70);
+            textBoxDescription.Multiline = true;
+            textBoxDescription.Name = "textBoxDescription";
+            textBoxDescription.ReadOnly = true;
+            textBoxDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            textBoxDescription.Size = new System.Drawing.Size(258, 184);
+            textBoxDescription.TabIndex = 4;
+            // 
             // Form1
             // 
-            ClientSize = new System.Drawing.Size(384, 261);
+            ClientSize = new System.Drawing.Size(648, 261);
+            Controls.Add(textBoxDescription);
             Controls.Add(labelGamePath);
             Controls.Add(btnInstallMod);
             Controls.Add(listBoxMods);
@@ -73,5 +85,6 @@ namespace UnityModManager
             ResumeLayout(false);
             PerformLayout();
         }
+        private System.Windows.Forms.TextBox textBoxDescription;
     }
 }
