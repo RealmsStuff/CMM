@@ -21,10 +21,38 @@ namespace UnityModManager
         void LoadModList()
         {
             listBoxMods.Items.Clear();
-            var modDirs = Directory.GetDirectories(modsPath).Select(Path.GetFileName);
+
+            if (!Directory.Exists(modsPath))
+                return;
+
+            var modDirs = Directory.GetDirectories(modsPath)
+                                   .Select(Path.GetFileName);
+
             foreach (var mod in modDirs)
                 listBoxMods.Items.Add(mod);
+
+            // Attach event handler for when selection changes
+            listBoxMods.SelectedIndexChanged += listBoxMods_SelectedIndexChanged;
+
+            // Automatically show description for first mod (if any)
+            if (listBoxMods.Items.Count > 0)
+                listBoxMods.SelectedIndex = 0;
         }
+
+        private void listBoxMods_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBoxMods.SelectedItem == null)
+                return;
+
+            string selectedMod = listBoxMods.SelectedItem.ToString();
+            string descFile = Path.Combine(modsPath, selectedMod, "CurrentMod.txt");
+
+            if (File.Exists(descFile))
+                textBoxDescription.Text = File.ReadAllText(descFile);
+            else
+                textBoxDescription.Text = "(No description available)";
+        }
+
 
         void LoadGamePath()
         {
@@ -77,7 +105,7 @@ namespace UnityModManager
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+           
         }
     }
 }
